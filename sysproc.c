@@ -25,7 +25,6 @@ sys_wait(void)
 {
   return wait();
 }
-
 int
 sys_kill(void)
 {
@@ -88,4 +87,9 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+int
+sys_wcupa(void)
+{
+   return 1871;
 }
