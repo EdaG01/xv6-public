@@ -104,6 +104,7 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_wcupa(void);
+extern int sys_getreadcount(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -128,6 +129,7 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_wcupa]   sys_wcupa,
+[SYS_getreadcount] sys_getreadcount;
 };
 
 void
@@ -138,7 +140,13 @@ syscall(void)
 
   num = curproc->tf->eax;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
-    curproc->tf->eax = syscalls[num]();
+	//cprintf("syscall number: %d\n",num)
+	if(num ==5){
+	  readcount;
+	//cprintf("readcount is: %d\n", readcount);
+	}
+
+  curproc->tf->eax = syscalls[num]();
   } else {
     cprintf("%d %s: unknown sys call %d\n",
             curproc->pid, curproc->name, num);

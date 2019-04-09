@@ -93,3 +93,8 @@ sys_wcupa(void)
 {
    return 1871;
 }
+int 
+sys_getreadcount(void)
+{
+	return readcount;
+}
